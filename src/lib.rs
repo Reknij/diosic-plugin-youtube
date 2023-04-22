@@ -24,7 +24,9 @@ pub extern "C" fn process_media_info_json(info_ptr: *const u8, file_path: *const
                             let c_string = CString::new(r);
                             match c_string {
                                 Ok(cs) => {
-                                    cs.as_ptr() as _
+                                    let ptr = cs.as_ptr();
+                                    mem::forget(cs);
+                                    ptr as _
                                 },
                                 Err(_) => info_ptr,
                             }
