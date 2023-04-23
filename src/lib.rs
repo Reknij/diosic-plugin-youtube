@@ -8,7 +8,7 @@ pub extern "C" fn process_media_info_json(info_ptr: *const u8, file_path: *const
     let info = serde_json::from_str::<MediaInfo>(str);
     match info {
         Ok(mut info) => {
-            let re = Regex::new(r"\s\[(\w+)\]$").unwrap();
+            let re = Regex::new(r"\s\[([a-zA-Z0-9_-]+)\]$").unwrap();
             let title = info.title.clone();
             let caps = re.captures(&title);
             match caps {
